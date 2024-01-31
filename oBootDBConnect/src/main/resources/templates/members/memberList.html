@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xml:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회원 조회</title>
+</head>
+<body>
+
+	<h1>회원 조회</h1>
+	
+	<div class="container">
+	
+		<div>
+		
+			<table border="1">
+			
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>이름</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="member : ${members}">
+						<td th:text="${member.id}"/>
+						<td th:text="${member.name}"/>
+					</tr>
+				</tbody>
+			
+			</table>
+		
+		</div>
+	
+	</div>
+
+</body>
+</html>
