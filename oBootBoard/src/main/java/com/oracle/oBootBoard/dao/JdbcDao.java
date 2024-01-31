@@ -26,6 +26,7 @@ public class JdbcDao implements BDao {
 		return DataSourceUtils.getConnection(dataSource);
 	}
 	
+	// 전체 게시글 화면에 뿌리기
 	@Override
 	public ArrayList<BDto> boardList() {
 
@@ -85,6 +86,7 @@ public class JdbcDao implements BDao {
 		
 	}
 
+	// 새 게시글 작성하기
 	@Override
 	public void write(String bName, String bTitle, String bContent) {
 
@@ -131,6 +133,7 @@ public class JdbcDao implements BDao {
 	}
 
 	// content_view
+	// 게시글 클릭하면 해당 내용 뿌리기
 	@Override
 	public BDto contentView(int bId) {
 
@@ -139,7 +142,7 @@ public class JdbcDao implements BDao {
 		ResultSet rs = null;
 		BDto dto = null;
 		
-		String sql = "select * from mvc_board where bId=?";
+		String sql = "select bId, bHit, bName, bTitle, bContent from mvc_board where bId=?";
 		
 		try {
 			
@@ -153,17 +156,18 @@ public class JdbcDao implements BDao {
 			
 			while (rs.next()) {
 				
-				int sbId = rs.getInt(bId);
+				int bHit = rs.getInt("bHit");
 				String bName = rs.getString("bName");
 				String bTitle = rs.getString("bTitle");
 				String bContent = rs.getString("bContent");
-				Timestamp bDate = rs.getTimestamp("bDate");
-				int bHit = rs.getInt("bHit");
-				int bGroup = rs.getInt("bGroup");
-				int bStep = rs.getInt("bStep");
-				int bIndent = rs.getInt("bIndent");
 				
-				dto = new BDto(sbId, bName, bTitle, bContent, bDate, bHit, bGroup, bStep, bIndent);
+				dto = new BDto();
+				
+				dto.setbId(bId);
+				dto.setbHit(bHit);
+				dto.setbName(bName);
+				dto.setbTitle(bTitle);
+				dto.setbContent(bContent);
 				
 			}
 			

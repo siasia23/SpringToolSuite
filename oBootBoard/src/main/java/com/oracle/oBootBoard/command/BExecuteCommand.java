@@ -57,6 +57,7 @@ public class BExecuteCommand {
 
 	// HW2
 	// content_view
+	// 게시된 글 하나 눌렀을때 정보 뜨게
 	public void bContentCmd(Model model) {
 
 		// 1. model이를 Map으로 전환
