@@ -3,6 +3,8 @@ package com.oracle.oBootDBConnect.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -37,7 +39,7 @@ public class JdbcMemberRepository implements MemberRepository {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
+		ResultSet rs = null;
 		
 		try {
 			
@@ -57,17 +59,72 @@ public class JdbcMemberRepository implements MemberRepository {
 			throw new IllegalStateException(e);
 			
 		} finally {
-			
-			// close 함수 작성할거
-			
+			close(conn, pstmt, rs);			
 		}
 		
 	}
+	
+	private void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
+	      try {
+	         if(rs != null) rs.close();
+	      } catch(SQLException e) {
+	         e.printStackTrace();
+	      }
+	      
+	      try {
+	         if(pstmt != null) pstmt.close();
+	      } catch(SQLException e) {
+	         e.printStackTrace();
+	      }
+	      
+	      try {
+	         if(conn != null) close(conn);
+	      } catch(SQLException e) {
+	         e.printStackTrace();
+	      }
+	      
+	   }
+	   private void close(Connection conn) throws SQLException {
+	      DataSourceUtils.releaseConnection(conn, dataSource);   // 데이터베이스 연결을 해제하는데 사용
+	   }
 
 	@Override
 	public List<Member1> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+
+		String sql = "select * from member7";
+		System.out.println("JdbcMemberRepository findAll sql->"+sql);
+		
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    
+	    try {
+	    	
+	    	conn = getConnection();
+	        pstmt = conn.prepareStatement(sql);
+	        rs = pstmt.executeQuery();
+	        
+	        List<Member1> members = new ArrayList<>();
+	        
+	        while(rs.next()) {
+	        	
+	        	Member1 member = new Member1();
+	            
+	        	member.setId(rs.getLong("id"));
+	            member.setName(rs.getString("name"));
+	            
+	            members.add(member);
+	            
+	        }
+	        
+	        return members;
+	         
+	      } catch(Exception e) {
+	         throw new IllegalStateException(e);
+	      } finally {
+	         close(conn, pstmt, rs);
+	      }
+		
 	}
 
 }
