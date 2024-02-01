@@ -17,6 +17,9 @@ public class SpringConfig {
 		this.dataSource = dataSource;
 	}
 	
+	// = new MemberRepository();
+	// @Bean 해야 component화 되어서 메모리에 올라감
+	// DI 방식 위해서 사용
 	@Bean
 	public MemberRepository memberRepository() {
 		return new JdbcMemberRepository(dataSource);

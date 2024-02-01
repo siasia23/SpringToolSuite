@@ -7,10 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.oracle.oBootBoard.command.BExecuteCommand;
 
 import jakarta.servlet.http.HttpServletRequest;
+
+//@Service가 @Controller를 찾음
+// DispatcherServlet이 controller를 찾을 때 @Controller 있는 놈을 찾음
 
 @Controller
 public class BController {
@@ -26,19 +30,25 @@ public class BController {
 		this.bExecuteCommand = bExecuteCommand;
 	}
 	
+	// @RequestMapping : Annotation for mapping web requests onto methods
+	
+	// list
 	// 게시판 목록
 	@RequestMapping("list")
 	public String list(Model model) {
 		
 		logger.info("list start...");
 		
+		// model이는 객체니까 call by reference. (call by value가 아님)
+		// call by reference는 변경된 value 유지함.
+		// 그래서 여기서 setAttribute 안 해줘도, service에서 변경해줬던 value 그대로 유지해서 가져옴
 		bExecuteCommand.bListCmd(model);
 		
 		return "list";
 		
 	}
 	
-	// 글작성
+	// write_view 페이지로 가기
 	@RequestMapping("/write_view")
 	public String write_view(Model model) {
 		
@@ -49,6 +59,7 @@ public class BController {
 	}
 	
 	// write_view
+	// 새 게시글 작성하기
 	@PostMapping(value = "/write")
 	public String write(HttpServletRequest request, Model model) {
 		
@@ -64,6 +75,7 @@ public class BController {
 	}
 	
 	// content_view
+	// 게시글 클릭하면 해당 내용 뿌리기
 	@RequestMapping("/content_view")
 	public String content_view(HttpServletRequest request, Model model) {
 		
@@ -74,6 +86,66 @@ public class BController {
 		bExecuteCommand.bContentCmd(model);
 		
 		return "content_view";
+		
+	}
+	
+	// content_view에서
+	// 작성된 게시글 수정하기
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String modify(HttpServletRequest request, Model model) {
+		
+		logger.info("modify start...");
+		
+		// View에 전달할 data를 Model에 저장
+		model.addAttribute("request", request);
+		
+		bExecuteCommand.bModifyCmd(model);
+		
+		return "redirect:list";
+		
+	}
+	
+	// reply_view
+	// 댓글 입력 창
+	@RequestMapping("/reply_view")
+	public String reply_view(HttpServletRequest request, Model model) {
+		
+		System.out.println("BController reply_view start...");
+		
+		model.addAttribute("request", request);
+		
+		bExecuteCommand.bReplyViewCmd(model);
+		
+		return "reply_view";
+		
+	}
+	
+	// reply_view
+	// 댓글 쓰기
+	@RequestMapping(value = "/reply", method = RequestMethod.POST)
+	public String reply(HttpServletRequest request, Model model) {
+		
+		System.out.println("BController reply start...");
+		
+		model.addAttribute("request", request);
+		
+		bExecuteCommand.bReplyCmd(model);
+		
+		return "redirect:list";
+		
+	}
+	
+	// 글 삭제
+	@RequestMapping("/delete")
+	public String delete(HttpServletRequest request, Model model) {
+		
+		System.out.println("BController delete start...");
+		
+		model.addAttribute("request", request);
+		
+		bExecuteCommand.bDeleteCmd(model);
+		
+		return "redirect:list";
 		
 	}
 	

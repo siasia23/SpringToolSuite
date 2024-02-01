@@ -11,6 +11,8 @@ import com.oracle.oBootBoard.dto.BDto;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+//@Service는 @Controller로 보냄
+
 @Service		// boot스러운 방식
 public class BExecuteCommand {
 
@@ -20,6 +22,7 @@ public class BExecuteCommand {
 		this.jdbcDao = jdbcDao;
 	}
 	
+	// list
 	// 게시판 목록
 	public void bListCmd(Model model) {
 		
@@ -33,6 +36,7 @@ public class BExecuteCommand {
 	}
 
 	// write_view
+	// 새 게시글 작성하기
 	public void bWriteCmd(Model model) {
 
 //		1) model이용 , map 선언
@@ -55,9 +59,8 @@ public class BExecuteCommand {
 		
 	}
 
-	// HW2
 	// content_view
-	// 게시된 글 하나 눌렀을때 정보 뜨게
+	// 게시글 클릭하면 해당 내용 뿌리기
 	public void bContentCmd(Model model) {
 
 		// 1. model이를 Map으로 전환
@@ -68,10 +71,88 @@ public class BExecuteCommand {
 		
 		int bId = Integer.parseInt(request.getParameter("bId"));
 		
-		// 3. HW3
 		BDto board = jdbcDao.contentView(bId);
 		
 		model.addAttribute("mvc_board", board);
+		
+	}
+
+	// content_view에서
+	// 작성된 게시글 수정하기
+	public void bModifyCmd(Model model) {
+		
+		// 1. model Map선언
+		Map<String, Object> map = model.asMap();
+		
+		// 2. parameter ->  bId, bName , bTitle , bContent
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		
+		int bId = Integer.parseInt(request.getParameter("bId"));
+		String bName = request.getParameter("bName");
+		String bTitle = request.getParameter("bTitle");
+		String bContent = request.getParameter("bContent");
+		
+		jdbcDao.modify(bId, bName, bTitle, bContent);
+		
+	}
+	
+	// reply_view
+	// 댓글 입력 창
+
+	public void bReplyViewCmd(Model model) {
+
+//		1)  model이용 , map 선언
+		Map<String, Object> map = model.asMap();
+		
+//		2) request 이용 ->  bid  추출
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		int bId = Integer.parseInt(request.getParameter("bId"));
+		
+//		  3) reply_view method 이용하여 (bid)
+//		    - BDto dto = dao.reply_view(bId);
+		BDto dto = jdbcDao.reply_view(bId);
+		
+		model.addAttribute("reply_view", dto);
+		
+	}
+
+	// reply_view
+	// 댓글 쓰기
+	public void bReplyCmd(Model model) {
+
+		System.out.println("BExecuteCommand bReplyCmd() start!!!!!!!!!");
+		
+//		1)  model이용 , map 선언
+		Map<String, Object> map = model.asMap();
+		
+//		2) request 이용 -> bid, bName, bTitle, bContent, bGroup, bStep, bIndent 추출
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		
+		int bId = Integer.parseInt(request.getParameter("bId"));
+		String bName = request.getParameter("bName");
+		String bTitle = request.getParameter("bTitle");
+		String bContent = request.getParameter("bContent");
+		int bGroup = Integer.parseInt(request.getParameter("bGroup"));
+		int bStep = Integer.parseInt(request.getParameter("bStep"));
+		int bIndent = Integer.parseInt(request.getParameter("bIndent"));
+		
+	    System.out.println("BExecuteCommand bReplyCmd() end!!!!!!!!!");
+	    
+//		3) reply method 이용하여 원글의 정보 저장 
+		jdbcDao.reply(bId, bName, bTitle, bContent, bGroup, bStep, bIndent);
+		
+	}
+
+	// 글 삭제
+	public void bDeleteCmd(Model model) {
+
+		Map<String, Object> map = model.asMap();
+		
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		
+		int bId = Integer.parseInt(request.getParameter("bId"));
+		
+		jdbcDao.delete(bId);
 		
 	}
 	

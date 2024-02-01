@@ -3,12 +3,21 @@ server:
   
 # Oracle Connect
 spring:
+
+  # File Size (이미지 올릴 때 사용)
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  # DB 연결 (JDBC)
   datasource:
     driver-class-name: oracle.jdbc.driver.OracleDriver
     url: jdbc:oracle:thin:@localhost:1521/xe
     username: scott
     password: tiger
-# View Resolver (View단 지정하기. 안 하면 templates으로 자동으로 가니까)
+    
+  # View Resolver (View단 지정하기. 안 하면 templates으로 자동으로 가니까)
   mvc:
     view:
       prefix: /WEB-INF/views/
