@@ -15,6 +15,7 @@ import org.springframework.jdbc.datasource.DataSourceUtils;
 import com.oracle.oBootBoard.dto.BDto;
 
 // DML logic 구성
+// config에 @ 달아둬서 여기에서는 안 달아도 됨
 public class JdbcDao implements BDao {
 
 	// JDBC 사용 : DB 연결에 가장 기본적임. DataSource 사용해야 함
@@ -101,6 +102,11 @@ public class JdbcDao implements BDao {
 		
 		// 1. insert into mvc_board
 		String sql = "insert into mvc_board values(mvc_board_seq.nextval, ?, ?, ?, sysdate, 0, mvc_board_seq.currval, 0, 0)";
+		
+			// nextval, currval은 oracle 내장 함수
+		// currval : nextval 실행된 후의(값이 이미 변경된 후의) 현재 값
+			// 그래서 nextval이 무조건!! 선행되어야 함.
+			// nextval 없는 currval은 존재하지 않음!!.
 		
 		// 2. PreparedStatement 방식으로
 		// 3. mvc_board_seq

@@ -24,13 +24,18 @@ public class BController {
 	// @Controller에 @Service 연결해주자
 		// BExecuteCommand = @Service
 	private final BExecuteCommand bExecuteCommand;
-	// @Service에 DAO 연결해주자
-	@Autowired
+	// @Service에 DAO 연결해주자 (DI방식)
+	@Autowired	
 	public BController(BExecuteCommand bExecuteCommand) {
 		this.bExecuteCommand = bExecuteCommand;
 	}
 	
 	// @RequestMapping : Annotation for mapping web requests onto methods
+	// 이것보다는 @GetMapping, @PostMapping이 권장됨
+	
+	// controller에서는 Model써서 data를 갖고다녀라. request.setAttribute() 대신에.
+	
+	// DI 방식을 썼기 때문에 BExecuteCommand bExecuteCommand = new BExecuteCommand(); 할 필요가 없어짐
 	
 	// list
 	// 게시판 목록
@@ -39,7 +44,8 @@ public class BController {
 		
 		logger.info("list start...");
 		
-		// model이는 객체니까 call by reference. (call by value가 아님)
+		// model이는 객체니까 call by reference(값이 아니라 주소값을 넘겨줌. 객체를 넣어줌). (call by value(값을 직접 넘겨줌)가 아님)
+		// . 찍어서 나오는건 전부 객체임.
 		// call by reference는 변경된 value 유지함.
 		// 그래서 여기서 setAttribute 안 해줘도, service에서 변경해줬던 value 그대로 유지해서 가져옴
 		bExecuteCommand.bListCmd(model);

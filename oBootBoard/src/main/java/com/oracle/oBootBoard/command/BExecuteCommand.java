@@ -3,6 +3,7 @@ package com.oracle.oBootBoard.command;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -17,7 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class BExecuteCommand {
 
 	private final BDao jdbcDao;
-	
+	// @Autowired 안 해도 하나짜리는 자동으로 인식해서 넣어줌
 	public BExecuteCommand(BDao jdbcDao) {
 		this.jdbcDao = jdbcDao;
 	}

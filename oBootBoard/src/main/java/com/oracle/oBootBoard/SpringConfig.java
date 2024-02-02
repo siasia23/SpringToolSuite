@@ -18,6 +18,7 @@ public class SpringConfig {
 		this.dataSource = dataSource;
 	}
 	
+	// @Configuration에 @Bean으로 설정해서 component화
 	@Bean
 	public BDao jdbcDao() {
 		return new JdbcDao(dataSource);
