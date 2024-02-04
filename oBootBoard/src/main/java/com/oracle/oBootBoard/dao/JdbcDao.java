@@ -14,12 +14,21 @@ import org.springframework.jdbc.datasource.DataSourceUtils;
 
 import com.oracle.oBootBoard.dto.BDto;
 
-// DML logic 구성
-// config에 @ 달아둬서 여기에서는 안 달아도 됨
+// DAO class (DML Logic 구현)
+// DB랑 연동해서 데이터 처리 로직 수행함!
+
+// @Configuration에 @Bean 달아둬서 여기에서는 @Repository 안 달아도 됨
 public class JdbcDao implements BDao {
 
+	// JDBC : Java DataBase Connectivity (API)
 	// JDBC 사용 : DB 연결에 가장 기본적임. DataSource 사용해야 함
-	// 한 번 설정하고 다시는 바꾸지 않으려고 final로 선언
+	
+	// DataSource : DriverManager 대신 사용되는거
+		// A factory for connections to the physical data source that this DataSource object represents.
+		// An alternative to the DriverManager facility, a DataSource object is the preferred means of getting a connection.
+		// .yml에서 부여한 datasource 정보가 모두 들어감!
+	
+	// 한 번 설정하고 다시는 바꾸지 않으려고 final로 선언 (DB 연동에 필요한 정보는 한 번만 넣어주면 되니까!)
 	private final DataSource dataSource;
 	
 	public JdbcDao(DataSource dataSource) {
@@ -27,6 +36,7 @@ public class JdbcDao implements BDao {
 	}
 	
 	private Connection getConnection() {
+		// DataSourceUtils : Helper class that provides static methods for obtaining JDBC Connections from a javax.sql.DataSource.
 		return DataSourceUtils.getConnection(dataSource);
 	}
 	

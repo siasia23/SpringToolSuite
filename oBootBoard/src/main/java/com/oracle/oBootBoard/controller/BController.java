@@ -16,24 +16,36 @@ import jakarta.servlet.http.HttpServletRequest;
 //@Service가 @Controller를 찾음
 // DispatcherServlet이 controller를 찾을 때 @Controller 있는 놈을 찾음
 
+// @Controller : using @Service methods, return View name
+
+// DispatcherServlet   : Front Controller.
+//								: HTTP request 받아들여서 다른 스프링 내장객체들 사이의 흐름 제어.
+
 @Controller
 public class BController {
 	
+	// 콘솔에 로그 찍자
 	private static final Logger logger = LoggerFactory.getLogger(BController.class);
 
 	// @Controller에 @Service 연결해주자
 		// BExecuteCommand = @Service
 	private final BExecuteCommand bExecuteCommand;
+	
+	// @Autowired : Spring Container에서 해당되는(의존성 있는) Bean(Java 객체)을 찾아서 연결(의존성 주입)함.
+
 	// @Service에 DAO 연결해주자 (DI방식)
+		// BController = @Controller
 	@Autowired	
 	public BController(BExecuteCommand bExecuteCommand) {
 		this.bExecuteCommand = bExecuteCommand;
 	}
 	
-	// @RequestMapping : Annotation for mapping web requests onto methods
+	// @RequestMapping : Annotation for mapping web requests onto methods.
 	// 이것보다는 @GetMapping, @PostMapping이 권장됨
 	
-	// controller에서는 Model써서 data를 갖고다녀라. request.setAttribute() 대신에.
+	// Controller에서는 Model 써서 data를 갖고다녀라. 
+		// request.setAttribute() 대신에.
+		// Model이 이미 attribute(key) 갖고 있으니까.
 	
 	// DI 방식을 썼기 때문에 BExecuteCommand bExecuteCommand = new BExecuteCommand(); 할 필요가 없어짐
 	
@@ -72,11 +84,17 @@ public class BController {
 		logger.info("write start...");
 		
 		// Model이가 key + value 쌍을 가짐
+			// 여기서 key 	= String request
+			// 여기서 value = Object request = HttpServletRequest
 		model.addAttribute("request", request);
 		
+		// Service method 호출하면서 객체 Model 전달해주기
 		bExecuteCommand.bWriteCmd(model);
 		
+		// View Resolver에게 전달할 view name을 return
 		return "redirect:list";
+
+		// View Resolver는 전달받은 view name과 prefix, suffix 조립해서 client에게 던져줄(보여줄) view file 결정함.
 		
 	}
 	

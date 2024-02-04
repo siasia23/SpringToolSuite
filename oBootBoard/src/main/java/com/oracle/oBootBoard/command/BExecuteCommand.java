@@ -40,22 +40,26 @@ public class BExecuteCommand {
 	// 새 게시글 작성하기
 	public void bWriteCmd(Model model) {
 
-//		1) model이용 , map 선언
+//		1) Model이용 , Map 선언
 		// asMap() : model이를 Map으로 만들자
+		// Map 형태로 되어 있는 model이를 진짜 Map으로 꺼내자
+			// 전달받은 key 	= String request
+			// 전달받은 value = Object request = HttpServletRequest
 		Map<String, Object> map = model.asMap();
 		
 //		2) request 이용 ->  bName  ,bTitle  , bContent  추출
-		// Map 형태로 되어 있는 model이를 진짜 Map으로 꺼내자
+		// get() : return the value to which the specified key is mapped.
+		//			  parameter : key
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
 		String bName = request.getParameter("bName");
 		String bTitle = request.getParameter("bTitle");
 		String bContent = request.getParameter("bContent");
 		
-//		3) dao  instance 선언
+//		3) DAO instance 선언
 		// 전역에서 이미 해둬서 Model이가 불러와줌
 		
-//		4) write method 이용하여 저장(bName, bTitle, bContent)
+//		4) write method(DML Logic in DAO) 이용하여 저장(bName, bTitle, bContent)
 		jdbcDao.write(bName, bTitle, bContent);
 		
 	}
@@ -99,7 +103,6 @@ public class BExecuteCommand {
 	
 	// reply_view
 	// 댓글 입력 창
-
 	public void bReplyViewCmd(Model model) {
 
 //		1)  model이용 , map 선언

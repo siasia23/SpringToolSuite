@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.oracle.oBootBoard.dto.BDto;
 
+// DAO interface
+
 // DB (oracle, mySQL)를 바꿀때 수정 유연하게 하기 위해 DAO는 interface로 씀
 // interface를 통해 표준화, 모델화, 모듈화, 부품화
 public interface BDao {

@@ -10,7 +10,7 @@ import com.oracle.oBootBoard.dao.BDao;
 import com.oracle.oBootBoard.dao.JdbcDao;
 import com.oracle.oBootBoard.dto.BDto;
 
-// Service. 고전적인 방식. DI 방식 말고 고전적인 방법으로
+// Service. DI 방식(=Annotation) 말고 고전적인 방법(=상속)으로
 public class BListCommand implements BCommand {
 
 	DataSource dataSource;
