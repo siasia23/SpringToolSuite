@@ -1,0 +1,43 @@
+package com.oracle.oBootJpaApi01.repository;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.oracle.oBootJpaApi01.domain.Member;
+
+import jakarta.persistence.EntityManager;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+
+@Repository
+
+@RequiredArgsConstructor	// : Generates a constructor with required arguments.
+										// Required arguments are final fields and fields with constraints such as @NonNull. 
+
+public class JpaMemberRepository implements MemberRepository {
+
+	private final EntityManager em;
+	
+	@Override
+	public Long save(@Valid Member member) {
+
+		System.out.println("JpaMemberRepository save() Before!");
+		
+		return null;
+	}
+	
+	@Override
+	public List<Member> findAll() {
+
+		String query = "select m from Member m";
+		
+		List<Member> memberList = em.createQuery(query, Member.class).getResultList();
+		
+		System.out.println("JpaMemberRepository findAll memberList.size() : " + memberList.size());
+		
+		return memberList;
+		
+	}
+
+}

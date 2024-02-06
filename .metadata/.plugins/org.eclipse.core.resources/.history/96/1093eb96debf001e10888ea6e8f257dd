@@ -1,0 +1,5 @@
+package com.oracle.oBootDBConnect;
+
+public class SpringConfig {
+
+}

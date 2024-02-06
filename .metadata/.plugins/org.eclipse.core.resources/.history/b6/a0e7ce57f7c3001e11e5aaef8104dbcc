@@ -1,0 +1,31 @@
+server:
+  port : 8386
+  
+# Oracle Connect
+spring:
+
+  # File Size (이미지 올릴 때 사용)
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  # DB 연결 (JDBC)
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521/xe
+    username: scott
+    password: tiger
+      
+  # JPA Setting
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+# logger를 통해 hibernate 실행        
+logging.level:
+  org.hibernate.SQL: debug

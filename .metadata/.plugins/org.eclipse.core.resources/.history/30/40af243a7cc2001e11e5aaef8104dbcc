@@ -1,0 +1,9 @@
+package com.oracle.oBootJpa02.service;
+
+import com.oracle.oBootJpa02.repository.MemberRepository;
+
+public class MemberService {
+
+	private final MemberRepository memberRepository;
+	
+}

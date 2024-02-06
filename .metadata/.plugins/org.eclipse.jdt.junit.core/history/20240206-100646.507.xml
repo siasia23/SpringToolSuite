@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="OBootJpaApi01ApplicationTests" project="oBootJpaApi01" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.oracle.oBootJpaApi01.OBootJpaApi01ApplicationTests" time="0.474" displayname="OBootJpaApi01ApplicationTests" uniqueid="[engine:junit-jupiter]/[class:com.oracle.oBootJpaApi01.OBootJpaApi01ApplicationTests]">
+    <testcase name="contextLoads" classname="com.oracle.oBootJpaApi01.OBootJpaApi01ApplicationTests" time="0.474" displayname="contextLoads()" uniqueid="[engine:junit-jupiter]/[class:com.oracle.oBootJpaApi01.OBootJpaApi01ApplicationTests]/[method:contextLoads()]"/>
+  </testsuite>
+</testrun>

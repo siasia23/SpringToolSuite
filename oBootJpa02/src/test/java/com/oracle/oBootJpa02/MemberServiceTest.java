@@ -1,8 +1,13 @@
 package com.oracle.oBootJpa02;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.oracle.oBootJpa02.domain.Member;
@@ -30,6 +35,9 @@ public class MemberServiceTest {
 		System.out.println("Test @BeforeEach ...");
 	}
 	
+	@Test
+	@Rollback(value = false)		// rollback false = commit
+	// 회원 등록
 	public void memberSave() {
 		
 		// 1. 테스트 조건
@@ -43,6 +51,20 @@ public class MemberServiceTest {
 		// 3. 결과
 		System.out.println("MemberServiceTest memberSave() member.getId() : " + member.getId());
 		System.out.println("MemberServiceTest memberSave() member3.getId() : " + member3.getId());
+		
+	}
+	
+	@Test
+	// 회원 조회
+	public void memberFind() {
+		
+		Long findId = 1L;
+		
+		List<Member> memberList =  memberService.getListAllMember();
+		System.out.println("MemberServiceTest memberFind() memberList.size() : " + memberList.size());
+
+		Optional<Member> member = memberService.findByMember(findId);
+		System.out.println("MemberServiceTest memberFind() member : " + member);
 		
 	}
 	

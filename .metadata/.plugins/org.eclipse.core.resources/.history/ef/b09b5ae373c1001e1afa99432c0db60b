@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>createMemberForm.html</title>
+</head>
+<body>
+
+	<h1>JPA 회원 등록</h1>
+	
+	<div class="container">
+		<form action="/members/save" method="post">
+			ID : <input type="text" name="id" required="required"><p>
+			이름 : <input type="text" name="name" placeholder="이름을 입력하세요."><p>
+		</form>
+	</div>
+
+</body>
+</html>

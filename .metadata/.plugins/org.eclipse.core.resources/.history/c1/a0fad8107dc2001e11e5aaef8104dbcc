@@ -1,0 +1,9 @@
+package com.oracle.oBootJpa02.controller;
+
+import com.oracle.oBootJpa02.service.MemberService;
+
+public class MemberController {
+
+	private final MemberService memberService;
+	
+}

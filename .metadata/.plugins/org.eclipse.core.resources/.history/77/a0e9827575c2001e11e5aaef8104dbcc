@@ -1,0 +1,8 @@
+package com.oracle.oBootJpa01.domain;
+
+import jakarta.persistence.Entity;
+
+@Entity
+public class Team {
+
+}

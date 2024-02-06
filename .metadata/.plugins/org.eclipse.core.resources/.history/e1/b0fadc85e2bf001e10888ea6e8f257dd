@@ -1,0 +1,5 @@
+package com.oracle.oBootBoard.dao;
+
+public interface BDao {
+
+}

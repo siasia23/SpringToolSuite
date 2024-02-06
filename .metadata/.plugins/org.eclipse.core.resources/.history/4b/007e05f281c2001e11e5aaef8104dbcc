@@ -1,0 +1,22 @@
+package com.oracle.oBootJpa02;
+
+import javax.sql.DataSource;
+
+import org.springframework.context.annotation.Configuration;
+
+import jakarta.persistence.EntityManager;
+
+@Configuration
+public class SpringConfig {
+
+	private final DataSource 		dataSource;
+	private final EntityManager 	em;
+	
+	public SpringConfig(DataSource dataSource, EntityManager em) {
+		this.dataSource = dataSource;
+		this.em = em;
+	}
+	
+	
+	
+}

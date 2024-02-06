@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>memberList.html</title>
+</head>
+<body>
+
+	<h1>JPA01 회원 조회</h1>
+	
+	<div class="nav">
+		<form action="/members/search" method="post">
+			회원검색이름 : <input type="text" name="name" placeholder="회원검색 이름을 입력하세요.">
+			<button type="submit">검색</button><p>
+		</form>
+	</div>
+
+	<div class="container">
+		<div>
+			<table border="1">
+			
+				<thead>
+					<tr>
+						<th>No</th>
+						<th>이름</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="member : ${members}">
+						<td th:text="${member.id}"/>
+						<td th:text="${member.name}"/>
+					</tr>
+				</tbody>
+			
+			</table>
+		</div>
+	</div>
+
+</body>
+</html>

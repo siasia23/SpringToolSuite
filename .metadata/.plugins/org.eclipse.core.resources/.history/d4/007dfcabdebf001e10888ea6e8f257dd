@@ -1,0 +1,11 @@
+package com.oracle.oBootDBConnect;
+
+import org.springframework.context.annotation.Configuration;
+
+// spring 환경 설정
+@Configuration		
+public class SpringConfig {
+
+	
+	
+}

@@ -1,0 +1,23 @@
+server:
+  port : 8383
+  
+# Oracle Connect
+spring:
+
+  # File Size
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521/xe
+    username: scott
+    password: tiger
+    
+  # View Resolver (View단 지정하기. 안 하면 templates으로 자동으로 가니까)
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp

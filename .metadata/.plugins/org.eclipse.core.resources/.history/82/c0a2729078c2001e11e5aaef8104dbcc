@@ -1,0 +1,21 @@
+package com.oracle.oBootJpa01.domain;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.Data;
+
+@Entity
+
+// @Data = @Getter + @Setter
+@Data
+
+public class Team {
+
+	@Id
+	private Long team_id;
+	
+	@Column(name = "teamname")
+	private String name;
+	
+}

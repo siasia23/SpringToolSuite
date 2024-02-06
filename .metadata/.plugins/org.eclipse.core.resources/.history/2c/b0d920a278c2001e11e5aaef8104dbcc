@@ -1,0 +1,33 @@
+package com.oracle.oBootJpa02.domain;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity		// 논리적 table
+
+@Getter
+@Setter
+
+@SequenceGenerator(	name = "member_seq_gen", 
+								sequenceName = "member_seq_generate", 
+								initialValue = 1,
+								allocationSize = 1)
+
+@Table(name = "member2")		// 물리적 table
+public class Member {
+
+	@Id		// = primary key
+	@Column(name = "member_id", precision = 10)		// @Column : column 정보 설정
+	private Long 		id;
+	
+	@Column(name = "user_name", length = 50)
+	private String 	name;
+	
+	private Long 		sal;
+	
+}

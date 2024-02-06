@@ -1,0 +1,30 @@
+package com.oracle.oBootJpa02.service;
+
+import java.util.List;
+
+import com.oracle.oBootJpa02.domain.Member;
+import com.oracle.oBootJpa02.repository.MemberRepository;
+
+public class MemberService {
+
+	private final MemberRepository memberRepository;
+	
+	public MemberService(MemberRepository memberRepository) {
+		this.memberRepository = memberRepository;
+	}
+	
+	// 회원가입
+	public Member join(Member member) {
+		
+		System.out.println("MemberService join member.getName() : " + member.getName());
+		
+		memberRepository.save(member);
+		
+		return member;
+		
+	}
+	
+	// 전체회원 조회
+	public List<Member> listMember = memberRepository.findAll();
+	
+}

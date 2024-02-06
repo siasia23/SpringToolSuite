@@ -1,0 +1,16 @@
+package com.oracle.oBootJpa02;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.oracle.oBootJpa02.repository.MemberRepository;
+import com.oracle.oBootJpa02.service.MemberService;
+
+public class MemberServiceTest {
+
+	@Autowired
+	MemberService memberService;
+	
+	@Autowired
+	MemberRepository memberRepository;
+	
+}

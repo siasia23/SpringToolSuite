@@ -1,0 +1,3 @@
+<%@ taglib prefix="c" uri=""%>
+<%@ taglib prefix="fmt" uri=""%>
+<link href="resources/css/board.css" rel="stylesheet" type="text/css">

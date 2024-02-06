@@ -1,0 +1,9 @@
+package com.oracle.oBootBoard;
+
+import org.springframework.context.annotation.Configuration;
+
+//환경 설정
+@Configuration	
+public class SpringConfig {
+
+}

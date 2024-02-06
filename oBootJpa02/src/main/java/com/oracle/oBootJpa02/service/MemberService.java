@@ -9,7 +9,7 @@ import com.oracle.oBootJpa02.domain.Member;
 import com.oracle.oBootJpa02.repository.MemberRepository;
 
 @Transactional
-// JPA는 Service 계층에  transaction 추가 (data 무결성 유지 위해)
+// JPA는 Service 계층에 transaction 추가 (data 무결성 유지 위해)
 
 // Spring은 해당 service class의 method 실행 시 transaction 시작
 // method 정상 종료되면 해당 transaction Commit(= Query 날림) (단, Runtime Exception 발생하면 Rollback)

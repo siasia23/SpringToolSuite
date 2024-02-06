@@ -1,0 +1,38 @@
+package com.oracle.oBootJpa01.repository;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.oracle.oBootJpa01.domain.Member;
+
+import jakarta.persistence.EntityManager;
+
+@Repository
+public class JpaMemberRepository implements MemberRepository {
+
+	// JPA DML 작업 할 때 EntityManager 필수!!!!!!!!!!!
+	private final EntityManager em;
+	public JpaMemberRepository(EntityManager em) {
+		this.em = em;
+	}
+	
+	// 회원가입
+	// createMemberForm.html
+	@Override
+	public Member memberSave(Member member) {
+
+		// persist() : Make an instance managed and persistent. (DB에 data 저장하는 method)
+		em.persist(member);
+		System.out.println("JpaMemberRepository memberSave member After...");
+		return member;
+		
+	}
+
+	@Override
+	public List<Member> findAllMember() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,8 @@
+package com.oracle.oBootBoard.dto;
+
+public class BDto {
+
+	int bId;
+	
+	
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<typeInfoHistroy>
+    <typeInfo handle="=oBootBoard/src\/main\/java=/gradle_scope=/main=/=/gradle_used_by_scope=/main,test=/&lt;com.oracle.oBootBoard.dao{BDao.java[BDao" modifiers="513" timestamp="1706768564058"/>
+    <typeInfo handle="=oBootBoard/src\/main\/java=/gradle_scope=/main=/=/gradle_used_by_scope=/main,test=/&lt;com.oracle.oBootBoard.command{BCommand.java[BCommand" modifiers="513" timestamp="1706670264744"/>
+    <typeInfo handle="=oBootJpa01/src\/main\/java=/gradle_scope=/main=/=/gradle_used_by_scope=/main,test=/&lt;com.oracle.oBootJpa01.repository{MemberRepository.java[MemberRepository" modifiers="513" timestamp="1706853854591"/>
+    <typeInfo handle="=oBootJpa01/C:\/Users\/admin\/.gradle\/caches\/modules-2\/files-2.1\/org.aspectj\/aspectjweaver\/1.9.21\/beaabaea95c7f3330f415c72ee0ffe79b51d172f\/aspectjweaver-1.9.21.jar=/gradle_used_by_scope=/main,test=/&lt;org.aspectj.weaver(Member.class[Member" modifiers="1537" timestamp="1706835068730"/>
+</typeInfoHistroy>

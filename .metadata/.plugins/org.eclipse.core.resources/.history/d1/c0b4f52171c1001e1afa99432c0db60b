@@ -1,0 +1,32 @@
+package com.oracle.oBootJpa01.repository;
+
+import java.util.List;
+
+import com.oracle.oBootJpa01.domain.Member;
+
+import jakarta.persistence.EntityManager;
+
+public class JpaMemberRepository implements MemberRepository {
+
+	// JPA DML 작업 할 때 EntityManager 필수!!!!!!!!!!!
+	private final EntityManager em;
+	public JpaMemberRepository(EntityManager em) {
+		this.em = em;
+	}
+	
+	@Override
+	public Member memberSave(Member member) {
+		
+		em.persist(member);
+		System.out.println("JpaMemberRepository memberSave member After...");
+		return member;
+		
+	}
+
+	@Override
+	public List<Member> findAllMember() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

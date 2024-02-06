@@ -1,0 +1,16 @@
+package com.oracle.oBootBoard.dao;
+
+import java.util.ArrayList;
+
+import com.oracle.oBootBoard.dto.BDto;
+
+// DB (oracle, mySQL)를 바꿀때 유연하게 하기 위해 DAO는 interface로 씀
+public interface BDao {
+
+	public ArrayList<BDto> boardList();
+
+	public void write(String bName, String bTitle, String bContent);
+
+	public BDto contentView(int bId);
+	
+}

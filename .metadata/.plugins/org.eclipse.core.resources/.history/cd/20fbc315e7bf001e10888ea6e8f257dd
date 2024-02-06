@@ -1,0 +1,25 @@
+package com.oracle.oBootBoard.command;
+
+import javax.sql.DataSource;
+
+import org.springframework.ui.Model;
+
+import com.oracle.oBootBoard.dao.BDao;
+import com.oracle.oBootBoard.dao.JdbcDao;
+
+// Service
+public class BListCommand implements BCommand {
+
+	DataSource dataSource;
+	
+	@Override
+	public void execute(Model model) {
+
+		// DAO 연결. 고전적인 방법으로
+		BDao dao = new JdbcDao(dataSource);
+		
+		
+		
+	}
+
+}

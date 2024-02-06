@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="header.jsp" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form action="reply" method="post">
+	
+		<input type="hidden" name="bId" value="${reply_view.bId }">
+		<input type="hidden" name="bGroup" value="${reply_view.bGroup }">
+		<input type="hidden" name="bStep" value="${reply_view.bStep" }">
+		<input type="hidden" name="bIndent" value="${reply_view.bIndent }">
+	
+	</form>
+
+</body>
+</html>

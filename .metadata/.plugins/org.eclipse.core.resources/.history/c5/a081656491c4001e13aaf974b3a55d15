@@ -1,0 +1,13 @@
+package com.oracle.oBootJpaApi01.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import com.oracle.oBootJpaApi01.service.MemberService;
+
+@RestController		// : annotated with @Controller and @ResponseBody. 
+							// 사용 목적 : Ajax + RestApi
+public class JpaRestApiController {
+	
+	private final MemberService memberService;
+
+}

@@ -1,0 +1,21 @@
+package com.oracle.oBootJpaApi01.service;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.oracle.oBootJpaApi01.repository.MemberRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+
+@RequiredArgsConstructor
+
+@Transactional
+
+public class MemberService {
+
+	// service에 필수인 DAO!!!!
+	private final MemberRepository memberRepository;
+	
+}

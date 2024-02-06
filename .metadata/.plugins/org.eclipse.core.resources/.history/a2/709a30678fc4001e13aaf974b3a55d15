@@ -1,0 +1,5 @@
+package com.oracle.oBootJpaApi01.repository;
+
+public interface MemberRepository {
+
+}

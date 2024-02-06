@@ -1,0 +1,12 @@
+package com.oracle.oBootJpa01.service;
+
+import org.springframework.stereotype.Service;
+
+import com.oracle.oBootJpa01.repository.MemberRepository;
+
+@Service
+public class MemberService {
+
+	private final MemberRepository memberRepository;
+	
+}

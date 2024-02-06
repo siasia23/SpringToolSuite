@@ -1,0 +1,21 @@
+package com.oracle.oBootBoard.command;
+
+import javax.sql.DataSource;
+
+import org.springframework.ui.Model;
+
+// Service
+public class BListCommand implements BCommand {
+
+	DataSource dataSource;
+	
+	@Override
+	public void execute(Model model) {
+
+		
+		
+		
+		
+	}
+
+}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>memberList.html</title>
+</head>
+<body>
+
+	<h1>JPA02 회원 조회</h1>
+	
+	<div class="nav">
+		<form action="/members/search" method="post">
+			회원검색 이름 : 	<input type="text" 	name="teamname" 	placeholder="팀이름을 입력하세요.">
+			<button type="submit">등록</button>
+		</form>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>memberModify.html</title>
+</head>
+<body>
+
+	<h1>JPA02 회원 수정</h1>
+
+</body>
+</html>

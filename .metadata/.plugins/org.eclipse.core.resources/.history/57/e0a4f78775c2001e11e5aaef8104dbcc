@@ -1,0 +1,14 @@
+package com.oracle.oBootJpa01.domain;
+
+import jakarta.persistence.Entity;
+import lombok.Data;
+import lombok.Getter;
+
+@Entity
+
+// @Data = @Getter + @Setter
+@Data
+
+public class Team {
+
+}

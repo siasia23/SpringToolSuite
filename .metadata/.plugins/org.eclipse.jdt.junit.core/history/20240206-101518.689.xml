@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="MemberServiceTest (1)" project="oBootJpa02" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.oracle.oBootJpa02.MemberServiceTest" time="0.574" displayname="MemberServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.oracle.oBootJpa02.MemberServiceTest]">
+    <testcase name="memberSave" classname="com.oracle.oBootJpa02.MemberServiceTest" time="0.574" displayname="memberSave()" uniqueid="[engine:junit-jupiter]/[class:com.oracle.oBootJpa02.MemberServiceTest]/[method:memberSave()]"/>
+  </testsuite>
+</testrun>

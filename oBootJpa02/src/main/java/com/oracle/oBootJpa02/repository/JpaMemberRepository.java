@@ -60,11 +60,11 @@ public class JpaMemberRepository implements MemberRepository {
 													.setParameter("name", pname)
 													.getResultList();
 		
-/*		- error! -
-		String query = "select m from Member m where name Like : name%";
+//		- error! -
+/*		String query = "select m from Member m where m.name Like : searchName%";
 		
 		List<Member> memberList = em.createQuery(query, Member.class)
-													.setParameter("name", searchName)
+													.setParameter("searchName", searchName)
 													.getResultList();
 */		
 		System.out.println("JpaMemberRepository findByNames() memberList.size() : " + memberList.size());
