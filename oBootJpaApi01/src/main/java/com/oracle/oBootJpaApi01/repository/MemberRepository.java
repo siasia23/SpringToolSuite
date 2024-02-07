@@ -11,5 +11,9 @@ public interface MemberRepository {
 	Long 					save(@Valid Member member);
 	
 	List<Member> 	findAll();
+
+	void 					updateByMember(Member member);
+
+	Member 				findByMember(Long memberId);
 	
 }

@@ -2,6 +2,7 @@ package com.oracle.oBootJpaApi01.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -42,8 +43,14 @@ public class Member {
 	
 	private Long 		sal;
 	
+	private String		status;
+	
 	// 테이블 간의 관계 설정 (table join)
-	@ManyToOne		// = 다 : 1
+	// @ManyToOne : parent table에 할 것!
+	@ManyToOne(fetch = FetchType.EAGER)		// = 다 : 1
+					// fetch = range, scope, area ...
+												// EAGER (default) 	: select 시, joined table 모든 데이터 가져옴
+												// LAZY 					: select 시, 해당 테이블의 데이터만 가져옴. 성능면에서 더 좋아서 실무에서 주로 사용됨.
 	@JoinColumn(name = "team_id")		// name = DB physical column name
 	private Team 		team;
 	
