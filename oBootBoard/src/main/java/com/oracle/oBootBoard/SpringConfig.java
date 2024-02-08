@@ -14,6 +14,7 @@ import com.oracle.oBootBoard.dao.JdbcDao;
 // 1. 여기에서 @Bean으로 등록한 것들이 하나씩 Spring Container에 생성됨 
 	// key	= Bean's name	(= method name)
 	// value	= Bean's object	(= returned instance)
+
 // 2. Spring Container가 생성된 Bean들끼리의 의존관계 분석해서 자동으로 의존성 주입시켜줌
 
 @Configuration	

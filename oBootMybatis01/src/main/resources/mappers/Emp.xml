@@ -1,4 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper></mapper>
+
+<mapper namespace="com.oracle.oBootMybatis01.EmpMapper">
+
+	<select id="empTotal" resultType="int">
+		SELECT Count(*) FROM EMP
+	</select>
+	
+	<select id="siaEmpList" parameterType="int" resultType="Emp">
+	
+		select *
+		from (
+			
+			select rownum rn, a.*
+			from (select * 
+					from emp 
+					order by empno) a
+			
+		)
+		where rn between #{start} and #{end}
+		
+	</select>
+	
+	<select id="siaDetailEmp" parameterType="int" resultType="Emp">
+	
+		select * 
+		from EMP 
+		where empno = #{empno}
+		
+	</select>
+	
+	<select id="siaEmpUpdate" parameterType="Emp" resultType="int">
+		
+		update emp
+		set 
+		where
+		
+	</select>
+	
+</mapper>

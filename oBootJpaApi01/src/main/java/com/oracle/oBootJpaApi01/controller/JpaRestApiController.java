@@ -149,6 +149,7 @@ public class JpaRestApiController {
 																// stream() : JAVA 8에서 추가된, 람다를 활용할 수 있는 기술 중 하나
 																.stream()
 																// map() : 118~127 line의		for (Member member : findMembers)		기능
+																// 람다식 문법 : 	함수인자 -> 함수결과
 																.map(m->new MemberRtnDto(m.getName(), m.getSal()))
 																// map() 결과로 흩어져있는 데이터를 모아주자(collect 해주자)
 																.collect(Collectors.toList());
@@ -176,7 +177,7 @@ public class JpaRestApiController {
 								// class 는 기본적으로 parameter 가 존재하지 않지만, 다른 class type 을 parameter 로 받아서 유연하게 구현하기 위해.
 
 		private final int totCout;	// total count
-		private final T data;		// T type instance name = data로 하겠다.
+		private final T data;		// T type instance name = data 로 하겠다.
 		
 	}
 	
@@ -215,6 +216,8 @@ public class JpaRestApiController {
 	}
 	
 	@Data
+	// static : 	runtime 이전 class loading time 에 실행. 
+	//				instance 를 만들지 않고도 클래스가 실행 되게 함.
 	static class UpdateMemberRequest {
 		
 		private String 	name;
