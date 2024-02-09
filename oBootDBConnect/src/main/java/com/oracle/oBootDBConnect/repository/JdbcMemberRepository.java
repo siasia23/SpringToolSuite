@@ -84,15 +84,16 @@ public class JdbcMemberRepository implements MemberRepository {
 	      }
 	      
 	   }
-	   private void close(Connection conn) throws SQLException {
-	      DataSourceUtils.releaseConnection(conn, dataSource);   // 데이터베이스 연결을 해제하는데 사용
-	   }
+	
+	private void close(Connection conn) throws SQLException {
+		DataSourceUtils.releaseConnection(conn, dataSource);   // 데이터베이스 연결을 해제하는데 사용
+	}
 
 	@Override
 	public List<Member1> findAll() {
 
 		String sql = "select * from member7";
-		System.out.println("JdbcMemberRepository findAll sql->"+sql);
+		System.out.println("JdbcMemberRepository findAll sql->" + sql);
 		
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;

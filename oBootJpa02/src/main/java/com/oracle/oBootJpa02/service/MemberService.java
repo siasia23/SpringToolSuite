@@ -13,6 +13,7 @@ import com.oracle.oBootJpa02.repository.MemberRepository;
 
 // Spring은 해당 service class의 method 실행 시 transaction 시작
 // method 정상 종료되면 해당 transaction Commit(= Query 날림) (단, Runtime Exception 발생하면 Rollback)
+
 // JPA 통한 모든 데이터 변경은 transaction 내에서 실행됨
 
 public class MemberService {

@@ -44,7 +44,7 @@ public class BExecuteCommand {
 		// asMap() : model이를 Map으로 만들자
 		// Map 형태로 되어 있는 model이를 진짜 Map으로 꺼내자
 			// 전달받은 key 	= String request
-			// 전달받은 value = Object request = HttpServletRequest
+			// 전달받은 value 	= Object request = HttpServletRequest
 		Map<String, Object> map = model.asMap();
 		
 //		2) request 이용 ->  bName  ,bTitle  , bContent  추출

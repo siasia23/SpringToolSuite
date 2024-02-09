@@ -74,6 +74,7 @@ public class JpaRestApiController {
 
 	// buffer class
 	@Data
+	// static : class loading time 에 memory loading
 	static class CreateMemberRequest {
 		
 		@NotEmpty
@@ -83,7 +84,8 @@ public class JpaRestApiController {
 		
 	}
 	
-	@Data		// @Data가 @RequiredArgsConstructor를 포괄하고 있고, 필드가 final이어서 클래스 내부에 기본생성자를 자동으로 만들어줌
+	@Data		
+// @Data가 @RequiredArgsConstructor를 포괄하고 있고, 필드가 final이어서 클래스 내부에 기본생성자를 자동으로 만들어줌
 //	@RequiredArgsConstructor : final field에만 적용됨
 	static class CreateMemberResponse {	// class JpaRestApiController 내의 내장 class
 		

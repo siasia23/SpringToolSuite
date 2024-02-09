@@ -14,7 +14,7 @@ import lombok.ToString;
 // @Data = @Getter + @Setter + @ToString
 @Data
 
-@SequenceGenerator(	name = "team_seq_gen",
+@SequenceGenerator(name = "team_seq_gen",
 								sequenceName = "team_seq_generator",
 								initialValue = 1,
 								allocationSize = 1)

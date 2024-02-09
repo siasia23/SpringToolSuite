@@ -13,7 +13,7 @@ import lombok.ToString;
 @Entity
 
 // ORM (Object Relational Mapping) 
-	// Object = 논리적 객체. 여기서는 Class명 'Member'
+	// Object = 논리적 객체. 여기서는 Class name 'Member'
 	// Relational = 물리적 객체. 여기서는 DB의 Table name 'member1'
 
 @Table(name = "member1")		// 물리적 객체명 : member1

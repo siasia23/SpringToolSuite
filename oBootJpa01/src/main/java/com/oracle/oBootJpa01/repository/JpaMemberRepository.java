@@ -63,7 +63,7 @@ public class JpaMemberRepository implements MemberRepository {
 		List<Member> memberList = em.createQuery(query, Member.class)
 													.setParameter("name", pname)		// pname으로 받아온 값을 query 안의 name에 넣겠다.
 													.getResultList();
-		
+
 		System.out.println("JpaMemberRepository memberList.size() : " + memberList.size());
 		
 		return memberList;

@@ -16,12 +16,13 @@ import lombok.ToString;
 
 @Entity		// 논리적 table
 
+// @Data = @Getter + @Setter + @ToString
 @Getter
 @Setter
 @ToString
 
 // @SequenceGenerator : sequence 생성
-@SequenceGenerator(	name = "member_seq_gen", 						// name : Java instance name
+@SequenceGenerator(name = "member_seq_gen", 						// name : Java instance name
 								sequenceName = "member_seq_generate", 	// sequenceName : DB sequence name
 								initialValue = 1,
 								allocationSize = 1)

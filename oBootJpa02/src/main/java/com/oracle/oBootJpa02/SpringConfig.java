@@ -14,8 +14,8 @@ import jakarta.persistence.EntityManager;
 @Configuration
 public class SpringConfig {
 
-	private final DataSource 		dataSource;
-	private final EntityManager 	em;
+	private final DataSource 		dataSource;		// JDBC
+	private final EntityManager 	em;					// JPA
 	
 	public SpringConfig(DataSource dataSource, EntityManager em) {
 		this.dataSource = dataSource;

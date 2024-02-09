@@ -76,7 +76,7 @@ public class JpaMemberRepository implements MemberRepository {
 
 		Member member = em.find(Member.class, id);
 		
-		// Optional : null값을 포함해서 값을 가져옴. > NullPointException 회피 가능
+		// Optional : null값을 포함해서 값을 가져옴. > NullPointerException 회피 가능
 		return Optional.ofNullable(member);
 	}
 

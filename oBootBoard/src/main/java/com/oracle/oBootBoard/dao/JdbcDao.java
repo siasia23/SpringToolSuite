@@ -21,7 +21,7 @@ import com.oracle.oBootBoard.dto.BDto;
 public class JdbcDao implements BDao {
 
 	// JDBC : Java DataBase Connectivity (API)
-	// JDBC 사용 : DB 연결에 가장 기본적임. DataSource 사용해야 함
+	// JDBC 사용 : DB 연결에 가장 기본적임. DataSource 구현 객체 사용해서 연결.
 	
 	// DataSource : DriverManager 대신 사용되는거
 		// A factory for connections to the physical data source that this DataSource object represents.
@@ -30,7 +30,7 @@ public class JdbcDao implements BDao {
 	
 	// 한 번 설정하고 다시는 바꾸지 않으려고 final로 선언 (DB 연동에 필요한 정보는 한 번만 넣어주면 되니까!)
 	private final DataSource dataSource;
-	
+
 	public JdbcDao(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
@@ -46,6 +46,7 @@ public class JdbcDao implements BDao {
 	public ArrayList<BDto> boardList() {
 
 		ArrayList<BDto> bList = new ArrayList<BDto>();
+		
 		Connection conn = null;
 		PreparedStatement pstmt =null;
 		ResultSet rs = null;
@@ -161,6 +162,7 @@ public class JdbcDao implements BDao {
 		upHit(bId);
 		
 		BDto dto = null;
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -288,13 +290,13 @@ public class JdbcDao implements BDao {
 		
 	}
 
-	
 	// reply_view
 	// 댓글 입력 창
 	@Override
 	public BDto reply_view(int bId) {
 
 		BDto dto = null;
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -347,7 +349,6 @@ public class JdbcDao implements BDao {
 		
 	}
 
-	
 	// reply_view
 	// 댓글 쓰기
 	@Override
