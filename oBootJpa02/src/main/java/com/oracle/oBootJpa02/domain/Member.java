@@ -36,7 +36,7 @@ public class Member {
 	// @GeneratedValue : Provides for the specification of generation strategies for the values of primary keys. 
 	@GeneratedValue(	strategy = GenerationType.SEQUENCE,
 								generator = "member_seq_gen")					// generator = Java 객체 name
-							// strategy = GenerationType.AUTO 로 대체 가능함? 아마??
+								// strategy = GenerationType.AUTO 로 대체 가능함? 아마??
 	
 	@Column(name = "member_id", precision = 10)		// @Column : DB column 정보 설정
 	private Long 		id;
