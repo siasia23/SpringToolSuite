@@ -8,27 +8,33 @@ import com.oracle.oBootJpa02.domain.Team;
 
 import jakarta.persistence.EntityManager;
 
+// DAO 구현체
 public class JpaMemberRepository implements MemberRepository {
 
+	// persistence context 관리자
 	private final EntityManager em;
 	
+	// DAO 객체
 	public JpaMemberRepository(EntityManager em) {
+
+		// DAO (DML Logic) 는 persistence context 를 통해서 수행하겠다.
 		this.em = em;
+		
 	}
 	
 	@Override
 	public Member save(Member member) {
 
-		// Team 저장(persist()) (Member-Team 간의 foreign key 설정)
-		
 		Team team = new Team();
-		
+
+		// Team 저장(persist()) (Member-Team 간의 foreign key 설정)
 		team.setName(member.getTeamname());
 		em.persist(team);
 		
 		member.setTeam(team);
 		em.persist(member);
 		
+		// find(Entity class, primary key) : Find by primary key.
 		Member member3 = em.find(Member.class, member.getId());
 		
 		// member를 찍어보자
@@ -83,7 +89,6 @@ public class JpaMemberRepository implements MemberRepository {
 	@Override
 	public void updateByMember(Member member) {
 
-//		int result = 0;
 		Member member3 = em.find(Member.class, member.getId());
 		
 		if (member3 != null) {
@@ -105,11 +110,8 @@ public class JpaMemberRepository implements MemberRepository {
 			
 			System.out.println("JpaMemberRepository updateByMember() member : " + member);
 			
-//			result = 1;
-			
 		} else {
 			
-//			result = 0;
 			System.out.println("JpaMemberRepository updateByMember에 member가 존재하지 않음");
 			
 		}

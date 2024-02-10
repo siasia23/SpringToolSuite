@@ -11,9 +11,13 @@ import com.oracle.oBootBoard.dao.JdbcDao;
 // @Configuration : 환경 설정 : Spring Container에 Bean 직접 등록
 	// 직접 등록 안 하면 Spring이 알아서 동일 패키지 내의 class들에 대해 components scanning
 
-// 1. 여기에서 @Bean으로 등록한 것들이 하나씩 Spring Container에 생성됨 
+// 1. 여기에서 @Bean으로 등록한 것들이 "하나씩" Spring Container에 생성됨.
+// @Configuration 은 Singleton Pattern 을 보장해줌. (스프링의 제공 기능)
 	// key	= Bean's name	(= method name)
 	// value	= Bean's object	(= returned instance)
+
+// Spring Container = Singleton Container
+// Spring Beans = Singleton Beans = 메모리 낭비 막음
 
 // 2. Spring Container가 생성된 Bean들끼리의 의존관계 분석해서 자동으로 의존성 주입시켜줌 (DI)
 
@@ -27,6 +31,8 @@ public class SpringConfig {
 	}
 	
 	// @Bean : Java 객체. Spring root container에 생성돼서, 어디서든 공유 가능함.
+	//				@Configuration과 같이 쓰면 Singleton 보장되고,
+	//				단독으로 쓰면 spring contatiner 가 관리하지 않는 순수 자바 객체로 등록돼버림. (= new 반복)
 	
 	// @Configuration에 @Bean으로 설정해서 component화
 	@Bean

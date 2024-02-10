@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.oracle.oBootJpa01.domain.Member;
 import com.oracle.oBootJpa01.service.MemberService;
 
+// 컨트롤러는 클라이언트의 요청값에 매핑되는 서비스를 찾아 수행하고 뷰 네임을 리턴
+
 @Controller
 public class MemberController {
 
@@ -30,6 +32,7 @@ public class MemberController {
 		
 		System.out.println("MemberController /members/new start!");
 		
+		// 컨트롤러가 리턴하는건 view name
 		return "members/createMemberForm";
 		
 	}

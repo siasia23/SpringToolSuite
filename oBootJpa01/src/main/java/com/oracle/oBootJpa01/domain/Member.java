@@ -12,9 +12,16 @@ import lombok.ToString;
 
 @Entity
 
-// ORM (Object Relational Mapping) 
+// ORM (Object Relational Mapping) : 객체와 DB를 연결시켜주는 '도구'!!
 	// Object = 논리적 객체. 여기서는 Class name 'Member'
 	// Relational = 물리적 객체. 여기서는 DB의 Table name 'member1'
+
+// JPA (Java Persistence API) : Java에서 사용되는 ORM의 표준!
+	// 인터페이스니까 실제로 사용하기 위해 프레임워크 필요함.
+	// 그 프레임워크가 Hibernate
+	// 즉!!! Hibernate는 JPA의 구현체!!!
+
+	// Hibernate는 내부적으로 JDBC API 사용함
 
 @Table(name = "member1")		// 물리적 객체명 : member1
 

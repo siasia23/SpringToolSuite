@@ -22,9 +22,16 @@ public class JpaMemberRepository implements MemberRepository {
 	@Override
 	public Member memberSave(Member member) {
 
-		// persist() : Make an instance managed and persistent. (DB에 data 저장하는 method)
+		// persist() : Make an instance managed and persistent.
+		// 이 메소드 호출하기 전의 default = transient
+		
+		// persistence context에 담겨있지만 아직 transient 상태인 member라는 instance를 
+		// persistent하게 만들어서 
+		// EntityManager가 관리하게 하자.
 		em.persist(member);
+		
 		System.out.println("JpaMemberRepository memberSave member After...");
+		
 		return member;
 		
 	}

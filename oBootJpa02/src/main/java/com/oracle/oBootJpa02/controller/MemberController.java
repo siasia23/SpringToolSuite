@@ -20,23 +20,30 @@ public class MemberController {
 		this.memberService = memberService;
 	}
 	
+	// client 로부터 (GET 방식으로) 요청받은 value
 	@GetMapping(value = "/members/new")
 	public String createForm() {
 		
 		System.out.println("MemberController createForm() Start!");
 		
+		// (이 request 에서 실행할 service 는 없으니까 바로 View 로 response)
+		
+		// View Resolver 에게 전달할 값
 		return "members/createMemberForm";
 		
 	}
 	
+	// client 로부터 (POST 방식으로) 요청받은 value
 	@PostMapping(value = "/members/save")
 	public String create(Member member) {
 		
 		System.out.println("MemberController create() Start!");
 		System.out.println("member.getName() : " + member.getName());
 		
+		// 이 request 에서 실행할 service
 		memberService.join(member);
 		
+		// View Resolver 에게 전달할 값
 		return "redirect:/";
 		
 	}
