@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.oracle.oBootMybatis01.dao.DeptDao;
 import com.oracle.oBootMybatis01.dao.EmpDao;
+import com.oracle.oBootMybatis01.model.Dept;
 import com.oracle.oBootMybatis01.model.Emp;
+import com.oracle.oBootMybatis01.model.EmpDept;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class EmpServiceImpl implements EmpService {
 
 	private final EmpDao ed;
+	private final DeptDao dd;
 	
 	@Override
 	public int totalEmp() {
@@ -53,7 +57,10 @@ public class EmpServiceImpl implements EmpService {
 	@Override
 	public int updateEmp(Emp emp) {
 
-		int updateCount = ed.updateEmp(emp);
+		int updateCount = 0;
+		System.out.println("EmpServiceImpl updateEmp() Start!");
+		
+		updateCount = ed.updateEmp(emp);
 		
 //      1. EmpService안에 updateEmp method 선언
 //      1) parameter : Emp
@@ -64,6 +71,88 @@ public class EmpServiceImpl implements EmpService {
 //		updateCount = session.update("siaEmpUpdate",emp);
 		
 		return updateCount;
+	}
+
+	@Override
+	public List<Emp> listManager() {
+
+		List<Emp> empList = null;
+		System.out.println("EmpServiceImpl listManager() Start!");
+		
+		empList = ed.listManager();
+		System.out.println("EmpServiceImpl listManager() empList.size() : " + empList.size());
+		
+		return empList;
+	}
+
+	@Override
+	public List<Dept> deptSelect() {
+
+		List<Dept> deptList = null;
+		System.out.println("EmpServiceImpl deptSelect() Start!");
+		
+		deptList = dd.deptSelect();
+		System.out.println("EmpServiceImpl deptSelect() deptList.size() : " + deptList.size());
+		
+		return deptList;
+	}
+
+	@Override
+	public int insertEmp(Emp emp) {
+
+		int result = 0;
+		System.out.println("EmpServiceImpl insertEmp() Start!");
+		
+		result = ed.insertEmp(emp);
+		System.out.println("EmpServiceImpl insertEmp() result : " + result);
+		
+		return result;
+	}
+
+	@Override
+	public int deleteEmp(int empno) {
+
+		int result = 0;
+		System.out.println("EmpServiceImpl deleteEmp() Start!");
+		
+		result = ed.deleteEmp(empno);
+		System.out.println("EmpServiceImpl deleteEmp() result : " + result);
+		
+		return result;
+	}
+
+	@Override
+	public List<Emp> listSearchEmp(Emp emp) {
+
+		List<Emp> empSearchList = null;
+		System.out.println("EmpServiceImpl listSearchEmp() Start!");
+		
+		empSearchList = ed.empSearchList3(emp);
+		System.out.println("empSearchList.size() : " + empSearchList.size());
+		
+		return empSearchList;
+	}
+
+	@Override
+	public int condTotalEmp(Emp emp) {
+
+		System.out.println("EmpServiceImpl condTotalEmp() Start!");
+		
+		int totSearchCnt = ed.condTotalEmp(emp);
+		System.out.println("EmpServiceImpl totSearchCnt : " + totSearchCnt);
+		
+		return totSearchCnt;
+	}
+
+	@Override
+	public List<EmpDept> listEmpDept() {
+
+		System.out.println("EmpServiceImpl listEmpDept() Start!");
+		
+		List<EmpDept> listEmpDept = ed.listEmpDept();
+		System.out.println("listEmpDept.size() : " + listEmpDept.size());
+		
+		return listEmpDept;
 	}
 
 }

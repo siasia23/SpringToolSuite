@@ -59,7 +59,7 @@
 			
 			<tr>
 				<td colspan="2">
-					<input type="button" value="확인">
+					<input type="submit" value="확인">
 				</td>
 			</tr>
 	

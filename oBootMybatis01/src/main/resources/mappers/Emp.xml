@@ -31,12 +31,89 @@
 		
 	</select>
 	
-	<select id="siaEmpUpdate" parameterType="Emp" resultType="int">
+	<update id="siaEmpUpdate" parameterType="Emp">
 		
 		update emp
-		set 
-		where
+		set 	ename = #{ename}, 
+				job = #{job}, 
+				mgr = #{mgr},
+				hiredate = #{hiredate},
+				sal = #{sal},
+				<if test="#{comm} != null">comm = #{comm},</if>
+				deptno = #{deptno}
+		where empno = #{empno}
 		
+	</update>
+	
+	<select id="siaSelectManager"  resultType="Emp">
+	
+		SELECT *
+		FROM emp
+		WHERE empno IN (SELECT mgr
+                					FROM emp)
+	
+	</select>
+	
+	<insert id="siaEmpInsert" parameterType="Emp">
+	
+		insert 
+		into emp
+		values (#{empno}, #{ename}, #{job}, #{mgr}, #{hiredate}, #{sal}, #{comm}, #{deptno})
+	
+	</insert>
+	
+	<delete id="siaEmpDelete" parameterType="int">
+		
+		delete 
+		from emp
+		where empno = #{empno}
+		
+	</delete>
+	
+	<select id="siaEmpSearchList3" parameterType="Emp" resultType="Emp">
+	
+		select *
+		from emp
+		
+		<choose>
+		
+			<when test="search == 's_job'">
+				where job like '%' || #{keyword} || '%'
+			</when>
+			
+			<when test="search == 's_ename'">
+				where ename like '%' || #{keyword} || '%'
+			</when>
+			
+			<otherwise>
+				where job like '%'
+			</otherwise>
+		
+		</choose>
+	
+	</select>
+	
+	<select id="siaCondTotalEmp" parameterType="Emp" resultType="int">
+	
+		select count(*)
+		from emp
+
+		<choose>
+		
+			<when test="search == 's_job'">
+				where job like '%' || #{keyword} || '%'
+			</when>
+			
+			<when test="search == 's_ename'">
+				where ename like '%' || #{keyword} || '%'
+			</when>
+			
+			<otherwise>
+				where job like '%'
+			</otherwise>
+		
+		</choose>
+	
 	</select>
 	
 </mapper>
