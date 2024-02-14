@@ -1,7 +1,10 @@
 package com.oracle.oBootMybatis01.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,11 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.oracle.oBootMybatis01.model.Dept;
+import com.oracle.oBootMybatis01.model.DeptVO;
 import com.oracle.oBootMybatis01.model.Emp;
 import com.oracle.oBootMybatis01.model.EmpDept;
 import com.oracle.oBootMybatis01.service.EmpService;
 import com.oracle.oBootMybatis01.service.Paging;
 
+import jakarta.mail.internet.MimeMessage;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 public class EmpController {
 
 	private final EmpService es;
+	private final JavaMailSender mailSender;
 	
 	@RequestMapping(value = "listEmp")
 	public String empList(Emp emp, Model model) {
@@ -253,7 +260,7 @@ public class EmpController {
 		
 		System.out.println("EmpController listSearch3() Start!");
 		
-		int totalEmp = es.condTotalEmp(emp);
+		int totalEmp = es.condTotalEmp(emp);	// conditionTotalEmp
 		System.out.println("EmpController listSearch3() totalEmp : " + totalEmp);
 		
 		// 페이징 작업
@@ -283,6 +290,122 @@ public class EmpController {
 		model.addAttribute("listEmpDept", listEmpDept);
 		
 		return "listEmpDept";
+		
+	}
+	
+	@RequestMapping(value = "mailTransport")
+	public String mailTransport(HttpServletRequest request, Model model) {
+		
+		System.out.println("mailSending...");
+		
+		// 받는 사람 이메일
+		String tomail = "ttaekwang@naver.com";
+		System.out.println(tomail);
+		
+		// 보내는 사람 이메일
+		String setfrom = "amazing9.code@gmail.com";
+		
+		// 제목
+		String title = "mailTransport 입니다.";
+		
+		try {
+			
+			// Mime 전자우편 인터넷 표준 format
+			MimeMessage message = mailSender.createMimeMessage();
+			
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+			
+			messageHelper.setFrom(setfrom);		// 보내는 사람 생략하면 정상작동 안 함
+			messageHelper.setTo(tomail);			// 받는 사람 이메일
+			messageHelper.setSubject(title);		// 메일 제목은 생략 가능
+			
+			// 랜덤하게 임시 비밀번호 생성
+			String tempPassword = (int) (Math.random() * 999999) + 1 + "";
+			
+			// 메일 내용
+			messageHelper.setText("임시 비밀번호입니다 : " + tempPassword);
+			System.out.println("임시 비밀번호입니다 : " + tempPassword);
+			
+			mailSender.send(message);
+			
+			model.addAttribute("check", 1);			// 정상 전달
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			System.out.println("mailTransport e.getMessage()" + e.getMessage());
+			
+			model.addAttribute("check", 2);			// 메일 전달 실패
+			
+		}
+		
+		return "mailResult";
+		
+	}
+	
+	// Procedure Test 입력화면
+	@RequestMapping(value = "writeDeptIn")
+	public String writeDeptIn(Model model) {
+		
+		System.out.println("writeDeptIn Start!");
+		
+		return "writeDept3";
+		
+	}
+	
+	// Procedure 방식
+	// 프로시저 통해 Dept 입력 후 VO 전달
+	@PostMapping(value = "writeDept")
+	public String writeDept(DeptVO deptVO, Model model) {
+		
+		es.insertDept(deptVO);
+		
+		if (deptVO == null) System.out.println("deptVO null");
+		
+		else {
+			
+			System.out.println("deptVO.getOdeptno() : " + deptVO.getOdeptno());
+			System.out.println("deptVO.getOdname() : " + deptVO.getOdname());
+			System.out.println("deptVO.getOloc() : " + deptVO.getOloc());
+			
+			model.addAttribute("msg", "정상 입력 되었습니다.");
+			model.addAttribute("dept", deptVO);
+			
+		}
+		
+		return "writeDept3";
+		
+	}
+	
+	// Map 방식 
+	// 장단점 : 개발 시 유연함. 유지보수 시에는 어려움.
+	@GetMapping(value = "writeDeptCursor")
+	public String writeDeptCursor(Model model) {
+		
+		System.out.println("EmpController writeDeptCursor Start!");
+		
+		// 부서 범위 조회
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("sDeptno", 10);		// start deptno
+		map.put("eDeptno", 55);		// end deptno
+		
+		es.selListDept(map);
+		
+		List<Dept> deptLists = (List<Dept>) map.get("dept");
+		
+		for (Dept dept : deptLists) {
+			
+			System.out.println("dept.getDname() : " + dept.getDname());
+			System.out.println("dept.getLoc() : " + dept.getLoc());
+			
+		}
+		
+		System.out.println("deptLists.size() : " + deptLists.size());
+		
+		model.addAttribute("deptList", deptLists);
+		
+		return "writeDeptCursor";
 		
 	}
 	

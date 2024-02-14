@@ -21,13 +21,26 @@ spring:
   jpa:
     show_sql: true
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
 
   # View Resolver (View단 지정하기. 안 하면 templates으로 자동으로 가니까)
   mvc:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+      
+  #Gmail Transfer
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: amazing9.code@gmail.com
+    password: yseb ubdt bcfq krrx
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
       
 # Mybatis
 mybatis:

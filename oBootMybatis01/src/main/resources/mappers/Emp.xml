@@ -23,6 +23,33 @@
 		
 	</select>
 	
+<!-- 	
+
+	쿼리문에 부등호가 들어가면 태그 뚜껑으로 인식되므로, 뚜껑이 아님을 표기해줘야함.
+	쿼리 시작 전에 			<![CDATA[	 				
+	쿼리 끝난 후에 								]]>		
+	
+	<select id="siaEmpList3" parameterType="int" resultType="Emp">
+	
+		<![CDATA[		
+		
+			select *
+			from (
+				
+				select rownum rn, a.*
+				from (select * 
+						from emp 
+						order by empno) a
+				
+			)
+			where 	rn >= #{start} 
+				and 	rn <= #{end}
+				
+		]]>	
+		
+	</select>
+ -->
+ 
 	<select id="siaDetailEmp" parameterType="int" resultType="Emp">
 	
 		select * 
@@ -69,7 +96,8 @@
 		where empno = #{empno}
 		
 	</delete>
-	
+
+	<!-- 검색결과 양이 적어서 1페이지 이내일 때는 페이지 작업 필요 없음 -->	
 	<select id="siaEmpSearchList3" parameterType="Emp" resultType="Emp">
 	
 		select *
@@ -93,6 +121,41 @@
 	
 	</select>
 	
+<!-- 	검색 결과가 2페이지 이상일 때는 페이지 작업 필요함
+
+	<select id="siaEmpSearchList3" parameterType="Emp" resultType="Emp">
+	
+		select *
+		from (
+			
+			select rownum rn, a.*
+			from (select * 
+					from emp 
+					
+					<choose>
+		
+					<when test="search == 's_job'">
+						where job like '%' || #{keyword} || '%'
+					</when>
+					
+					<when test="search == 's_ename'">
+						where ename like '%' || #{keyword} || '%'
+					</when>
+					
+					<otherwise>
+						where job like '%'
+					</otherwise>
+		
+					</choose>
+
+					order by empno) a
+			
+		)
+		where rn between #{start} and #{end}
+	
+	</select>
+-->
+
 	<select id="siaCondTotalEmp" parameterType="Emp" resultType="int">
 	
 		select count(*)
