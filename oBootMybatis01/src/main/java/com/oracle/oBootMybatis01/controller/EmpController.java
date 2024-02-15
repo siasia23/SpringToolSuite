@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.oracle.oBootMybatis01.dao.Member1Dao;
 import com.oracle.oBootMybatis01.model.Dept;
 import com.oracle.oBootMybatis01.model.DeptVO;
 import com.oracle.oBootMybatis01.model.Emp;
 import com.oracle.oBootMybatis01.model.EmpDept;
+import com.oracle.oBootMybatis01.model.Member1;
 import com.oracle.oBootMybatis01.service.EmpService;
 import com.oracle.oBootMybatis01.service.Paging;
 
@@ -33,6 +35,7 @@ public class EmpController {
 
 	private final EmpService es;
 	private final JavaMailSender mailSender;
+	private final Member1Dao md;
 	
 	@RequestMapping(value = "listEmp")
 	public String empList(Emp emp, Model model) {
@@ -406,6 +409,67 @@ public class EmpController {
 		model.addAttribute("deptList", deptLists);
 		
 		return "writeDeptCursor";
+		
+	}
+	
+	@RequestMapping(value = "interCeptorForm")
+	public String interCeptorForm(Model model) {
+		
+		System.out.println("EmpController interCeptorForm Start!");
+		
+		return "interCeptorForm";
+		
+	}
+	
+	// intercept 순서 2번
+	@RequestMapping(value = "interCeptor")
+	public String interCeptor(Member1 member1, Model model) {
+		
+		System.out.println("EmpController interCeptor Start!");
+		System.out.println("id : " + member1.getId());
+		
+		// 존재하면 1
+		// 존재하지 않으면 0
+		int memCnt = es.memCount(member1.getId());
+		System.out.println("memCnt : " + memCnt);
+		
+		model.addAttribute("id", member1.getId());
+		model.addAttribute("memCnt", memCnt);
+		
+		System.out.println("interCeptor Test End.");
+		
+		return "interCeptor";
+		
+	}
+	
+	@RequestMapping(value = "doMemberWrite")
+	public String doMemberWrite(Model model, HttpServletRequest request) {
+		
+		String ID = (String) request.getSession().getAttribute("ID");
+		
+		System.out.println("doMemberWrite부터 하세요.");
+		
+		model.addAttribute("id", ID);
+		
+		return "doMemberWrite";
+		
+	}
+	
+	@RequestMapping(value = "doMemberList")
+	public String doMemberList(Model model, HttpServletRequest request) {
+		
+		String ID = (String) request.getSession().getAttribute("ID");
+		
+		System.out.println("doMemberList Test Start. ID : " + ID);
+		
+		Member1 member1 = null;
+		
+		List<Member1> listMem = es.listMem(member1);
+		
+		model.addAttribute("id", ID);
+		model.addAttribute("listMem", listMem);
+		
+		return "doMemberList";
 		
 	}
 	
