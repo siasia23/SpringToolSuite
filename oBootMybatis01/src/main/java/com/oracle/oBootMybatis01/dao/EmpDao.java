@@ -27,4 +27,6 @@ public interface EmpDao {
 
 	List<EmpDept> listEmpDept();
 
+	String deptName(int deptno);
+
 }

@@ -2,6 +2,7 @@ package com.oracle.oBootMybatis01.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -11,8 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import com.oracle.oBootMybatis01.dao.Member1Dao;
 import com.oracle.oBootMybatis01.model.Dept;
 import com.oracle.oBootMybatis01.model.DeptVO;
@@ -470,6 +472,94 @@ public class EmpController {
 		model.addAttribute("listMem", listMem);
 		
 		return "doMemberList";
+		
+	}
+	
+	// ajaxFrom Test 입력화면
+	@RequestMapping(value = "ajaxForm")
+	public String ajaxForm(Model model) {
+		
+		System.out.println("ajaxForm Start!");
+		return "ajaxForm";
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "getDeptName")
+	public String getDeptName(Dept dept, Model model) {
+		
+		System.out.println("deptno : " + dept.getDeptno());
+		
+		String deptName = es.deptName(dept.getDeptno());
+		
+		System.out.println("deptName : " + deptName);
+		
+		return deptName;
+		
+	}
+	
+	// Ajax List Test
+	@RequestMapping(value = "listEmpAjaxForm")
+	public String listEmpAjaxForm(Model model) {
+		
+		Emp emp = new Emp();
+		
+		System.out.println("Ajax List Test Start!");
+		
+		// 페이지 세팅
+		emp.setStart(1);
+		emp.setEnd(10);
+		
+		List<Emp> listEmp = es.listEmp(emp);
+		System.out.println("listEmp.size() : " + listEmp.size());
+		
+		model.addAttribute("result", "kkk");
+		model.addAttribute("listEmp", listEmp);
+		
+		return "listEmpAjaxForm";
+		
+	}
+	
+	// json 객체를 전달할 때 annotation : @ResponseBody, @RequestBody
+	@ResponseBody		
+	@RequestMapping(value = "empSerializeWrite")
+	public Map<String, Object> empSerializeWrite(@RequestBody @Valid Emp emp) {
+		
+		System.out.println("EmpController Start!");
+		System.out.println("EmpController emp : " + emp);
+		
+		// 저장 성공햇다고 가정해봄.
+		int writeResult = 1;
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		System.out.println("EmpController empSerializeWrite writeResult : " + writeResult);
+		
+		resultMap.put("writeResult", writeResult);
+		
+		// Map 객체를 전달할거임
+		return resultMap;
+		
+	}
+	
+	@RequestMapping(value = "listEmpAjaxForm2")
+	public String listEmpAjaxForm2(Model model) {
+		
+		System.out.println("listEmpAjaxForm2 Start!");
+		
+		Emp emp = new Emp();
+		
+		System.out.println("Ajax List Test Start!");
+		
+		// 페이지 세팅
+		emp.setStart(1);
+		emp.setEnd(15);
+		
+		List<Emp> listEmp = es.listEmp(emp);
+		
+		model.addAttribute("listEmp", listEmp);
+		
+		return "listEmpAjaxForm2";
 		
 	}
 	

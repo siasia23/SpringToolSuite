@@ -194,4 +194,12 @@ public class EmpServiceImpl implements EmpService {
 		return md.listMem(member1);
 	}
 
+	@Override
+	public String deptName(int deptno) {
+
+		System.out.println("EmpServiceImpl deptName() Start!");
+		
+		return ed.deptName(deptno);
+	}
+
 }
