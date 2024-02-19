@@ -202,4 +202,22 @@ public class EmpServiceImpl implements EmpService {
 		return ed.deptName(deptno);
 	}
 
+	@Override
+	public int transactionInsertUpdate() {
+
+		System.out.println("EmpServiceImpl transactionInsertUpdate() Start!");
+		
+		// transaction 고려하지 않은 경우를 해보자
+		return md.transactionInsertUpdate();
+	}
+
+	@Override
+	public int transactionInsertUpdate3() {
+		
+		System.out.println("EmpServiceImpl transactionInsertUpdate() Start!");
+		
+		// transaction 고려한 경우를 해보자
+		return md.transactionInsertUpdate3();
+	}
+
 }

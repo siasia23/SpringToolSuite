@@ -563,4 +563,61 @@ public class EmpController {
 		
 	}
 	
+	@RequestMapping(value = "listEmpAjaxForm3")
+	public String listEmpAjaxForm3(Model model) {
+		
+		System.out.println("listEmpAjaxForm3 Start!");
+		
+		Emp emp = new Emp();
+				
+		emp.setStart(1);
+		emp.setEnd(15);
+		
+		List<Emp> listEmp = es.listEmp(emp);
+		
+		model.addAttribute("listEmp", listEmp);
+		
+		return "listEmpAjaxForm3";
+		
+	}
+	
+	// json 객체를 전달할 때 annotation : @ResponseBody, @RequestBody
+	@ResponseBody
+	@RequestMapping(value = "empListUpdate")
+	public Map<String, Object> empListUpdate(@RequestBody @Valid List<Emp> listEmp) {
+		
+		System.out.println("EmpController empListUpdate() Start!");
+		
+		int updateResult = 1;
+		
+		for (Emp emp : listEmp) {
+			System.out.println("emp : " + emp);
+		}
+		
+		System.out.println("updateResult : " + updateResult);
+		
+		Map<String, Object> resultMap = new HashMap<>();
+		
+		resultMap.put("updateResult", updateResult);
+		
+		return resultMap;
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "transactionInsertUpdate")
+	public String transactionInsertUpdate(Emp emp, Model model) {
+		
+		System.out.println("EmpController transactionInsertUpdate() Start!");
+		
+//		int returnMember = es.transactionInsertUpdate();
+		int returnMember = es.transactionInsertUpdate3();
+		System.out.println("returnMember : " + returnMember);
+		
+		String returnMemberString = String.valueOf(returnMember);
+		
+		return returnMemberString;
+		
+	}
+
 }

@@ -13,7 +13,17 @@
 	</select>
 	
 	<select id="listMember1" parameterType="Member1" resultType="Member1">
+		
 		select * from member1
+		
 	</select>
+	
+	<insert id="insertMember1" parameterType="Member1">
+	
+		insert
+		into Member1(id, password, name)
+		values (#{id}, #{password}, #{name})
+	
+	</insert>
 
 </mapper>

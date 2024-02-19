@@ -31,6 +31,8 @@ public class EmpRestController {
 		// HttpMessageConverter 가
 		// StringConverter 를 발동시킴!
 		
+		// 객체를 문자열로 바꾸는거 = 직렬화
+		
 	}
 	
 	// http://jsonviewer.stack.hu/
@@ -50,6 +52,8 @@ public class EmpRestController {
 		// Instance return 하면
 		// HttpMessageConverter 가
 		// JsonConverter 를 발동시킴!
+		
+		// 문자열을 객체로 바꾸는거 = 역직렬화
 		
 	}
 	
