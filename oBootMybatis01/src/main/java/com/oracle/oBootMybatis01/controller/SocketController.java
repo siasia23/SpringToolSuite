@@ -23,6 +23,8 @@ public class SocketController {
 		
 		return mv;
 		
+		// chatView.jsp 를 열어줌
+		
 	}
 	
 }

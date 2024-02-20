@@ -30,7 +30,7 @@ public class SocketHandler extends TextWebSocketHandler {
 	
 	
 	
-	// 웹소켓이 메세지를 수신하면 동작하는 메소드
+	// 순서 2. 웹소켓이 메세지를 수신하면 동작하는 메소드
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 
@@ -39,6 +39,7 @@ public class SocketHandler extends TextWebSocketHandler {
 		String msg = message.getPayload();
 		System.out.println("handleTextMessage msg : " + msg);
 		
+		// json text >> json object parsing
 		JSONObject jsonObj = jsonToObjectParser(msg);
 		
 		// type을 get 해서 분기
@@ -56,7 +57,7 @@ public class SocketHandler extends TextWebSocketHandler {
 				String yourName = (String) jsonObj.get("yourName");
 				System.out.println("handleTextMessage yourName : " + yourName);
 				
-				// 전체
+				// 전송 대상 : 전체
 				if (yourName.equals("ALL")) {
 					
 					for (String key : sessionMap.keySet()) {
@@ -77,7 +78,7 @@ public class SocketHandler extends TextWebSocketHandler {
 						
 					}
 					
-				} else {		// 개인 전송 대상자 (yourName은 개인 sessionID)
+				} else {		// 전송 대상 : 개인 (yourName은 개인 sessionID)
 					
 					// 상대방
 					System.out.println("개인 전송 대상자 상대방 sessionID : " + yourName);
@@ -110,7 +111,7 @@ public class SocketHandler extends TextWebSocketHandler {
 					
 				}
 				
-				break;		// case "message" break;
+			break;		// case "message" break;
 			
 			// sessionUserMap에 User 등록
 			case "userSave":
@@ -191,7 +192,7 @@ public class SocketHandler extends TextWebSocketHandler {
 					
 				}	// for
 				
-				break;		// case "userSave" break;
+			break;		// case "userSave" break;
 			
 			case "userDelete":
 				
@@ -204,7 +205,7 @@ public class SocketHandler extends TextWebSocketHandler {
 				// sessionUserMap 종료
 				sessionUserMap.remove(session.getId());
 				
-				break;		// case "userDelete" break;
+			break;		// case "userDelete" break;
 				
 		} // switch 
 		
@@ -232,10 +233,11 @@ public class SocketHandler extends TextWebSocketHandler {
 
 		System.out.println("SocketHandler afterConnectionEstablished Start!");
 		
-		// 웹소켓 연결되면 동작
+		// 웹소켓 연결되면 동작 > session id 얻음
+		// session은 call by reference
 		super.afterConnectionEstablished(session);
 		
-		// 연결 소켓을 Map에 등록
+		// 연결 소켓을 Map에 등록 >> session id 등록
 		sessionMap.put(session.getId(), session);
 		
 		JSONObject jsonObject = new JSONObject();

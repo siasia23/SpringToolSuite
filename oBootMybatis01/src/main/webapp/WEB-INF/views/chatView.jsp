@@ -60,6 +60,7 @@
 		console.log("wsOpen  location.host: " + location.host);
 		
 		// ${pageContext.request.contextPath} 는 안 적어도 되지만 쓰는걸 권장
+		// configuration에		 /chating	에 대한 설정이 잇음
         var wsUri  = "ws://" + location.host + "${pageContext.request.contextPath}/chating";
         
         // WebSocket 프로토콜을 사용하여 통신하기 위해서는 WebSocket객체를 생성. 
@@ -160,16 +161,24 @@
 					str  += " <option value='ALL'>전체 </option> "; 
 					
 					$(jsonMsg).each(
+							
 						function(){
+							
 							var str2 = "";
+							
 				            // User를 선택하여 message전송 가능토록 member에 등록 
 				            alert("내 sessionId->"+ $("#sessionId").val())
 				            alert("this.sessionId->"+ this.sessionId)
+				            
 							if(this.sessionId == $("#sessionId").val()){
+								
 								alert("내꺼임"+ $("#sessionId").val())
+								
 							} else {  // 타인 session일 경우 추가 등록 
+								
 								str2 += " <option value='"+this.sessionId + "'> "+this.userName  + "</option> "; 
 								str  += str2 ;
+								
 							}
 						}
 					);
